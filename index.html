@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online image compression tool. Reduce image file size while maintaining quality.">
+    <!-- Add Android download permission -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="android-download-permission" content="true">
+    <meta name="android-storage-permission" content="true">
+    <meta name="keywords" content="image compressor, image optimization, compress photos, reduce image size">
+    <meta name="author" content="Your Name">
+    <meta property="og:title" content="Image Compressor - Free Online Tool">
+    <meta property="og:description" content="Compress your images online without losing quality">
+    <meta property="og:type" content="website">
+    <meta name="robots" content="index, follow">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Free Image Compressor - Optimize Images Online">
+    <meta name="twitter:description" content="Compress your images online without losing quality. Free, fast, and secure image optimization tool.">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Image Compressor - Optimize Your Images Online</title>
+    <link rel="canonical" href="https://yourwebsite.com/image-compressor">
+    <link rel="stylesheet" href="styles.css">
+    <meta name="android-storage-permission" content="true">
+    
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "WebApplication",
+        "name": "Image Compressor",
+        "description": "Free online image compression tool",
+        "url": "https://yourwebsite.com/image-compressor",
+        "applicationCategory": "Multimedia",
+        "operatingSystem": "All",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+</head>
+<body>
+    <button class="theme-toggle" aria-label="Toggle dark mode">
+        <div class="slider">
+            <span class="icon moon-icon"><i class="fas fa-moon"></i></span>
+            
+        </div>
+    </button>
+  
+    <div class="container" role="main">
+        <h1 class="gradient-text">Free Online Image Compressor</h1>
+        
+       
+        <div class="upload-section" role="region" aria-label="Upload image">
+            <input type="file" id="imageInput" accept="image/*" hidden aria-label="Choose image file">
+            <div class="upload-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+            <h2 class="upload-text">Drag & Drop your image here</h2>
+            <p class="upload-subtext">or</p>
+            <h2 class="upload-text">Click here to upload image</h2>
+            <br>
+            <p class="upload-subtext">Supported formats: JPG, PNG, WebP (Max size: 50MB)</p>
+            <div class="upload-progress" aria-hidden="true"></div>
+        </div>
+
+        <div class="size-indicator">
+            <div class="size-bar"></div>
+            <span class="size-text"></span>
+        </div>
+
+        <div class="preview-section">
+            <div class="preview-box">
+                <h3>Original</h3>
+                <img id="originalPreview">
+                <div id="originalInfo" class="file-info"></div>
+            </div>
+            <div class="preview-box">
+                <h3>Compressed</h3>
+                <img id="compressedPreview">
+                <div id="compressedInfo" class="file-info"></div>
+            </div>
+        </div>
+
+        <div id="qualityControls" class="mode-controls">
+            <div class="control-group">
+                <label for="quality">Quality:</label>
+                <input type="range" id="quality" min="0" max="100" value="50">
+                <span id="qualityValue">50%</span>
+            </div>
+        </div>
+
+        <div class="compression-stats" role="status" aria-live="polite"></div>
+        
+        <!-- Update download button with download attribute -->
+        <button id="downloadBtn" class="download-btn" download="compressed-image" disabled>
+            Preferred upto-75% for better quality Download Compressed Image
+        </button>
+    </div>
+
+    <!-- Add success modal -->
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <p id="successMessage">Image saved successfully!</p>
+        </div>
+    </div>
+
+    <script src="compressor.js"></script>
+</body>
+</html>
