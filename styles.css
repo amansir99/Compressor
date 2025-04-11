@@ -109,6 +109,40 @@ h1 {
     display: flex;
     align-items: center;
     gap: 10px;
+    flex-wrap: wrap;
+}
+
+@media screen and (max-width: 480px) {
+    .control-group {
+        flex-direction: row;
+        align-items: center;
+        position: relative;
+        padding-right: 50px;
+    }
+
+    .control-group label {
+        min-width: auto;
+        margin-bottom: 0;
+    }
+
+    #qualityValue {
+        position: absolute;
+        right: 0;
+        width: 45px;
+        text-align: right;
+    }
+
+    .mode-controls {
+        position: relative;
+        padding: 15px;
+        overflow: hidden;
+    }
+
+    input[type="range"] {
+        flex: 1;
+        width: calc(100% - 60px);
+        margin: 10px;
+    }
 }
 
 label {
@@ -207,7 +241,7 @@ button {
     justify-content: center;
     gap: 10px;
     width: auto;
-    min-width: 200px;
+    min-width: 100px;
     margin: 20px auto;
     padding: 12px 25px;
     background: linear-gradient(145deg, #289af7, #002f5e);
