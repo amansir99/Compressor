@@ -1,0 +1,478 @@
+:root {
+    --bg-color: #80dbffa3;
+    --container-bg: #80dbffa3;
+    --text-color: #303030;
+    --border-color: #cbcbcb;
+    --shadow-color: rgb(0, 0, 0);
+    --upload-bg: #c4def8;
+    --upload-border: #106cce4e;
+    --hover-bg: #c4def8;
+    --animation-speed: 0.3s;
+    --bounce-ease: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+[data-theme="dark"] {
+    --bg-color: #121212;
+    --container-bg: rgba(255, 255, 255, 0.05);
+    --text-color: #ffffff;
+    --border-color: rgba(255, 255, 255, 0.1);
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --upload-bg: rgba(33, 150, 243, 0.08);
+    --upload-border: rgba(8, 114, 201, 0.814);
+    --hover-bg: rgba(33, 150, 243, 0.15);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    background: var(--bg-color);
+    padding: 20px;
+    color: var(--text-color);
+}
+
+.container {
+    max-width:1200px ;
+    margin: 20px auto;
+    background: var(--container-bg);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px var(--shadow-color);
+    animation: slideUp 0.6s var(--bounce-ease);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--text-color);
+}
+
+.upload-section {
+    border: 3px dashed var(--upload-border);
+    padding: 40px;
+    text-align: center;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    transition: all var(--animation-speed) var(--bounce-ease);
+    background: var(--upload-bg);
+    position: relative;
+    overflow: hidden;
+}
+
+.upload-section:before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(135, 126, 126, 0.1),
+        transparent
+    );
+    transform: translateX(-100%);
+    transition: transform 0.6s;
+}
+
+.upload-section:hover:before {
+    transform: translateX(100%);
+}
+
+.upload-section.drag-over {
+    background: var(--hover-bg);
+    border-color: var(--upload-border);
+    transform: scale(1.02);
+    animation: pulse 1s var(--bounce-ease) infinite;
+}
+
+.upload-section i {
+    font-size: 48px;
+    color: var(--upload-border);
+    margin-bottom: 15px;
+}
+
+.controls {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.control-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+label {
+    min-width: 120px;
+}
+
+input[type="range"] {
+    flex: 1;
+    height: 8px;
+    background: linear-gradient(90deg, var(--upload-border) var(--slider-value, 50%), #ddd var(--slider-value, 50%));
+    border-radius: 4px;
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+    transition: background 0.3s ease;
+    margin: 10px 0;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 24px;
+    height: 24px;
+    background: #ffffff;
+    border: 2px solid var(--upload-border);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s var(--bounce-ease);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+}
+
+input[type="range"]::-webkit-slider-thumb:active {
+    transform: scale(1.1);
+    background: var(--upload-border);
+}
+
+.quality-display {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: var(--upload-border);
+    transition: all 0.3s var(--bounce-ease);
+    display: inline-block;
+    min-width: 60px;
+    text-align: center;
+}
+
+.quality-display.changing {
+    transform: scale(1.2);
+    color: #2196f3;
+}
+
+input[type="number"] {
+    width: 100px;
+}
+
+.preview-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 20px;
+}
+
+.preview-box {
+    text-align: center;
+    background: var(--upload-bg);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px var(--shadow-color);
+    transform: translateY(20px);
+    opacity: 0;
+    animation: fadeInUp 0.6s var(--bounce-ease) forwards;
+}
+
+.preview-box:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    transition: transform var(--animation-speed) var(--bounce-ease);
+}
+
+img:hover {
+    transform: scale(1.02);
+}
+
+button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: auto;
+    min-width: 200px;
+    margin: 20px auto;
+    padding: 12px 25px;
+    background: linear-gradient(145deg, #289af7, #002f5e);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all var(--animation-speed) var(--bounce-ease);
+    font-weight: bold;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    font-size: 14px;
+    position: relative;
+    overflow: hidden;
+}
+
+button:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(33, 150, 243, 0.4);
+    background: linear-gradient(145deg, #32a4ff, #004480);
+}
+
+button:active:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px rgba(33, 150, 243, 0.3);
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+button:hover::before {
+    left: 100%;
+}
+
+button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+.download-btn {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.file-info {
+    display: flex;
+    justify-content: space-between;
+    background: var(--container-bg);
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 15px;
+    font-size: 0.9em;
+    color: var(--text-color);
+}
+
+select {
+    padding: 5px;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+}
+
+.mode-controls {
+    margin-top: 10px;
+    padding: 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    background: var(--upload-bg);
+    box-shadow: 0 2px 5px var(--shadow-color);
+    transition: all 0.3s ease;
+}
+
+.loading {
+    position: relative;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,0.8) url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><circle cx="25" cy="25" r="20" fill="none" stroke="%232196f3" stroke-width="5"><animateTransform attributeName="transform" type="rotate" dur="1s" from="0 25 25" to="360 25 25" repeatCount="indefinite"/></circle></svg>') center/50px no-repeat;
+    border-radius: 10px;
+    animation: fadeIn 0.3s ease;
+}
+
+.compression-stats {
+    text-align: center;
+    margin: 20px 0;
+    padding: 15px;
+    background: var(--hover-bg);
+    border-radius: 10px;
+    display: none;
+    animation: slideIn 0.5s var(--bounce-ease);
+}
+
+/* Theme Toggle Button Styles */
+.theme-toggle {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--container-bg);
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s var(--bounce-ease);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+    padding: 0;
+    z-index: 1000;
+    min-width: unset;
+    margin: 0;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
+}
+
+.theme-icon {
+    font-size: 12px;
+    color: var(--text-color);
+    transition: transform 0.4s var(--bounce-ease);
+    line-height: 1;
+}
+
+[data-theme="dark"] .theme-icon {
+    transform: rotate(360deg);
+}
+
+/* Add new keyframe animations */
+@keyframes slideUp {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.upload-icon i {
+    font-size: 64px;
+    color: var(--upload-border);
+    animation: glow 1.5s infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        text-shadow: 0 0 5px var(--upload-border), 0 0 10px var(--upload-border), 0 0 20px var(--upload-border);
+    }
+    to {
+        text-shadow: 0 0 10px var(--upload-border), 0 0 20px var(--upload-border), 0 0 30px var(--upload-border);
+    }
+}
+
+/* Add gradient animation for text */
+@keyframes gradientText {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.gradient-text {
+    background: linear-gradient(90deg, #920202, #eb0027, #1b02a9, #017409);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientText 3s ease infinite;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 1000;
+}
+
+.modal-content {
+    background: var(--container-bg);
+    margin: 20% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+    position: relative;
+    animation: slideUp 0.3s var(--bounce-ease);
+}
+
+.close-modal {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    font-size: 24px;
+    cursor: pointer;
+}
