@@ -9,21 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const qualityValue = document.getElementById('qualityValue');
     const downloadBtn = document.getElementById('downloadBtn');
     const compressionStats = document.querySelector('.compression-stats');
+    const imageComparison = document.querySelector('.image-comparison');
     let compressedBlob = null;
-
-    // Theme toggle functionality
-    const themeToggle = document.querySelector('.theme-toggle');
-    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
-
-    // Set initial theme from localStorage or system preference
-    const savedTheme = localStorage.getItem('theme') || (prefersDarkScheme.matches ? 'dark' : 'light');
-    document.documentElement.dataset.theme = savedTheme;
-
-    themeToggle.addEventListener('click', () => {
-        const newTheme = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
-        document.documentElement.dataset.theme = newTheme;
-        localStorage.setItem('theme', newTheme);
-    });
 
     // Drag and drop functionality
     uploadSection.addEventListener('dragover', (e) => {
@@ -85,6 +72,8 @@ document.addEventListener('DOMContentLoaded', () => {
             originalPreview.onload = () => {
                 updateFileInfo(originalInfo, file);
                 compressImage(originalPreview);
+                // Add class to show labels
+                imageComparison.classList.add('has-images');
             };
         };
         reader.readAsDataURL(file);
@@ -136,6 +125,10 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateFileInfo(infoElement, file) {
         const size = formatFileSize(file.size);
         infoElement.textContent = `Size: ${size}`;
+        if (infoElement.id === 'compressedInfo') {
+            downloadBtn.classList.add('ready');
+            downloadBtn.innerHTML = '<i class="fas fa-download"></i> Download Image';
+        }
     }
 
     function formatFileSize(bytes) {
@@ -149,10 +142,12 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateCompressionStats() {
         const originalSize = originalPreview.src ? atob(originalPreview.src.split(',')[1]).length : 0;
         const compressedSize = compressedBlob.size;
-        const savings = ((originalSize - compressedSize) / originalSize * 100).toFixed(1);
+        const savings = Math.max(0, ((1 - (compressedSize / originalSize)) * 100)).toFixed(1);
         
         compressionStats.style.display = 'block';
-        compressionStats.textContent = `Compression reduced file size by ${savings}%`;
+        compressionStats.textContent = compressedSize < originalSize 
+            ? `Compression reduced file size by ${savings}%`
+            : 'No additional compression needed';
     }
 
     downloadBtn.addEventListener('click', async () => {
@@ -199,5 +194,80 @@ document.addEventListener('DOMContentLoaded', () => {
     // Close modal when clicking X
     document.querySelector('.close-modal').addEventListener('click', () => {
         document.getElementById('successModal').style.display = 'none';
+    });
+
+    // Add improved slider functionality
+    const slider = document.querySelector('.comparison-slider');
+    const beforeImage = document.querySelector('.before-image');
+    let isSliding = false;
+
+    function updateSliderPosition(x) {
+        const bounds = imageComparison.getBoundingClientRect();
+        const position = Math.min(Math.max(0, x - bounds.left), bounds.width);
+        const percentage = (position / bounds.width) * 100;
+        
+        slider.style.left = `${percentage}%`;
+        // Change clip-path direction to reveal original image from left side
+        beforeImage.style.clipPath = `polygon(0 0, ${percentage}% 0, ${percentage}% 100%, 0 100%)`;
+    }
+
+    function initSlider(e) {
+        isSliding = true;
+        e.preventDefault(); // Prevent default touch behavior
+        updateSliderPosition(e.type === 'touchstart' ? e.touches[0].clientX : e.clientX);
+    }
+
+    function stopSliding() {
+        isSliding = false;
+    }
+
+    function slide(e) {
+        if (!isSliding) return;
+        updateSliderPosition(e.type === 'touchmove' ? e.touches[0].clientX : e.clientX);
+    }
+
+    function handleDoubleClick(e) {
+        // Quick toggle between full original and compressed view
+        updateSliderPosition(e.clientX < imageComparison.offsetWidth / 2 ? 0 : imageComparison.offsetWidth);
+    }
+
+    // Add double click handler
+    imageComparison.addEventListener('dblclick', handleDoubleClick);
+
+    // Mouse events
+    slider.addEventListener('mousedown', initSlider);
+    window.addEventListener('mousemove', slide);
+    window.addEventListener('mouseup', stopSliding);
+
+    // Touch events
+    slider.addEventListener('touchstart', initSlider);
+    window.addEventListener('touchmove', slide);
+    window.addEventListener('touchend', stopSliding);
+
+    // Initialize slider position
+    function initializeSlider() {
+        updateSliderPosition(imageComparison.getBoundingClientRect().left + (imageComparison.offsetWidth / 2));
+    }
+
+    // Initialize slider when images are loaded
+    originalPreview.addEventListener('load', initializeSlider);
+    compressedPreview.addEventListener('load', initializeSlider);
+
+    // Initialize without labels at start
+    imageComparison.classList.remove('has-images');
+
+    // Replace old menu toggle with new functionality
+    const menuIcon = document.querySelector('.menu-icon');
+    const menuDropdown = document.querySelector('.menu-dropdown');
+
+    menuIcon.addEventListener('click', (e) => {
+        e.stopPropagation();
+        menuDropdown.classList.toggle('active');
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.fixed-menu')) {
+            menuDropdown.classList.remove('active');
+        }
     });
 });
