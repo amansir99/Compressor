@@ -1,0 +1,97 @@
+.privacy-container {
+    max-width: 1000px;
+    margin: 120px auto;
+    padding: 2rem;
+    background: var(--container-bg);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px var(--shadow-color);
+}
+
+.privacy-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.privacy-header h1 {
+    font-size: 2.5rem;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+}
+
+.privacy-header p {
+    color: var(--text-color);
+    opacity: 0.8;
+}
+
+.privacy-section {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: var(--glass-bg);
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+}
+
+.privacy-section h2 {
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.privacy-section p {
+    color: var(--text-color);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.privacy-section ul {
+    list-style-type: disc;
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.privacy-section li {
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+}
+
+.data-collection-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+}
+
+.data-collection-table th,
+.data-collection-table td {
+    padding: 0.8rem;
+    border: 1px solid var(--border-color);
+    text-align: left;
+}
+
+.data-collection-table th {
+    background: var(--glass-bg);
+    font-weight: bold;
+}
+
+.contact-info {
+    margin-top: 2rem;
+    padding: 1rem;
+    background: var(--glass-bg);
+    border-radius: 10px;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .privacy-container {
+        margin: 80px 1rem;
+        padding: 1rem;
+    }
+
+    .privacy-header h1 {
+        font-size: 2rem;
+    }
+
+    .data-collection-table {
+        display: block;
+        overflow-x: auto;
+    }
+}
