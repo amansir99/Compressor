@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Image Compressor</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Theme Initialization -->
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
+<script src="compressor.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="nav-brand">
+            <i class="fas fa-compress-alt"></i>
+            <span>ImageCompressor</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html" title="Home"><i class="fas fa-home"></i><span>Home</span></a></li>
+            <li><a href="about.html" title="About"><i class="fas fa-info-circle"></i><span>About</span></a></li>
+            <li><a href="feedback.html" title="Feedback"><i class="fas fa-comment"></i><span>Feedback</span></a></li>
+            <li><a href="terms.html" title="Terms"><i class="fas fa-file-contract"></i><span>Terms</span></a></li>
+            <li><a href="privacy.html" title="Privacy"><i class="fas fa-shield-alt"></i><span>Privacy</span></a></li>
+            <li>
+                <button class="theme-toggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </li>
+        </ul>
+    </nav>
+    <div class="fixed-menu">
+    </div>
+    <div class="container">
+        <h1 class="gradient-text">About Us</h1>
+        <div class="about-content">
+            <section class="team-section">
+                <h2><i class="fas fa-rocket"></i> Our Mission</h2>
+                <p>
+                    <i class="fas fa-check-circle"></i> To deliver the most efficient and user-friendly image compression tool.
+                    <br>
+                    <i class="fas fa-bullseye"></i> We aim to empower users to optimize their images without sacrificing quality, all while minimizing storage space.
+                </p>
+            </section>
+
+            <section class="vision-section">
+                <h2><i class="fas fa-eye"></i> Our Vision</h2>
+                <p>
+                    <i class="fas fa-globe"></i> To make high-quality image compression accessible globally.
+                    <br>
+                    <i class="fas fa-chart-line"></i> We envision a web where optimized images lead to faster loading speeds and enhanced user experiences for everyone.
+                </p>
+            </section>
+
+            <section class="features-section">
+                <h2>What We Offer</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-bolt"></i>
+                        <h3>Fast Processing</h3>
+                        <p>Lightning-fast compression without compromising quality</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-lock"></i>
+                        <h3>Secure</h3>
+                        <p>Your images never leave your device, ensuring complete privacy</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-code"></i>
+                        <h3>Advanced Technology</h3>
+                        <p>Using cutting-edge compression algorithms</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-globe"></i>
+                        <h3>Free Access</h3>
+                        <p>Available worldwide with no restrictions</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="technology-section">
+                <h2>Our Technology</h2>
+                <p>We use advanced compression algorithms that analyze and optimize each image individually. Our system intelligently balances quality and file size to deliver the best possible results.</p>
+            </section>
+
+            <section class="values-section">
+                <h2>Our Values</h2>
+                <ul class="values-list">
+                    <li><i class="fas fa-check-circle"></i> User Privacy First</li>
+                    <li><i class="fas fa-check-circle"></i> Quality Preservation</li>
+                    <li><i class="fas fa-check-circle"></i> Continuous Innovation</li>
+                    <li><i class="fas fa-check-circle"></i> Open Access</li>
+                </ul>
+            </section>
+        </div>
+    </div>
+
+    
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="index.html">Home</a>
+                <a href="feedback.html">Feedback</a>
+                <a href="terms.html">Terms & Conditions</a>
+                <a href="privacy.html">Privacy Policy</a>
+            </div>
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <p>We provide free, secure, and efficient image compression tools for everyone.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Contact With Us</h3>
+                <p>Whatsapp: 6392068942</p>
+                <p>Follow us on social media</p>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/profile.php?id=61575315655035&mibextid=kFxxJD" aria-label="Facebook" target="_blank" rel="noopener"><i class="fab fa-facebook"></i></a>
+                    <a href="https://t.me/+fk4zonaJ4J81YzU1" aria-label="Telegram" target="_blank" rel="noopener"><i class="fab fa-telegram"></i></a>
+                    <a href="https://www.instagram.com/developer99aman?igsh=MW15MnZvaDIycXptdA==&utm_source=ig_contact_invite" aria-label="Instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+                    <a href="https://chat.whatsapp.com/F14GrmVTN3QHwfztpl6rFx" aria-label="WhatsApp" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <h3>Developed By Aman</h3>
+            <p>&copy; 2025 ImageCompressor. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="theme-manager.js"></script>
+</body>
+</html>
