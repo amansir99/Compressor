@@ -777,7 +777,7 @@ select {
 .step-number {
     width: 60px;
     height: 60px;
-    background: var(--primary-gradient);
+    background: var(---border-color);
     border-radius: 50%;
     font-size: 24px;
     box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
@@ -789,7 +789,7 @@ select {
     content: '';
     position: absolute;
     inset: 2px;
-    background: var(--container-bg);
+    background: var(--border-color);
     border-radius: 50%;
     z-index: 1;
 }
@@ -797,7 +797,7 @@ select {
 .step-number span {
     position: relative;
     z-index: 2;
-    background: var(--primary-gradient);
+    background: var(--text-color);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
